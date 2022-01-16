@@ -1,0 +1,60 @@
+<div ng-controller="restaurantController"><div class="restaurant" ng-if="restaurant.name">
+    <!-- // controls the each restaurant page -->
+      <div class="rest-wrapper">
+          <div class="image">
+              <img ng-src="{{restaurant.image}}" height="100" width="100">
+          </div><!--image-->
+          <div class="rest-info">
+              <div class="rest-category">
+                 <small>{{restaurant.category}} </small>
+              </div><!--rest category-->
+              <div class="rest-name">
+              <strong>{{restaurant.name}}</strong>
+              </div>
+              <div>
+                 <strong> {{restaurant.location}}</strong>
+              </div>
+              <div class="rest-address">
+                  {{restaurant.address}}
+              </div>
+          </div><!--rest info-->
+      </div><!--rest wrapper-->
+      <div class="rest-extra">
+          <div class="type">
+            <div><small>Cuisines:</small></div>
+          <div><small>Cost for Two: </small></div>
+          <div><small>Hours:</small></div>
+          <div ng-if="restaurant.bestDish"><small>Recommended: </small></div>
+      </div><!--type-->
+      <div class="value">
+          <div>{{restaurant.cuisines}}</div>
+          <div>₹{{restaurant.cost | number}}</div>
+          <div>{{restaurant.hours}}</div>
+          <div class="bestDish" ng-if="restaurant.bestDish">
+              <span>{{restaurant.bestDish.name}} </span>
+              <!-- <div class="button">Get Ingredients</div> -->
+              <div ng-click="getIngredients(restaurant.bestDish.image)" class="button">Get Ingredients</div>
+            <div class="button" ng-click="checkForDiabetes(restaurant.bestDish.image)">Diabetes Checker</div>
+            
+          </div><!--bestDish-->
+    </div><!--value-->
+  </div><!--rest-extra-->
+  <div class="rating">
+      <strong>{{restaurant.vote}}</strong>
+  </div>
+  
+  <div ng-switch="isSuitableForDiabetics">
+        <div ng-switch-when="true">This item is suitable for diabetics!!</div>
+        <div ng-switch-when="false">NOTE: This food item is not suitable for diabetics.</div>
+        <div ng-switch-default></div>
+      </div>
+  
+      <div ng-if="ingredients">
+      <ol>
+      <li ng-repeat="ingredient in ingredients">
+      {{ingredient}}
+      </li>
+      </ol>
+  </div><!--ingredients-->
+  <div ng-hide="restaurant.name"><h1>404-Restaurant not found</h1></div>
+  </div><!--restaurantController div>
